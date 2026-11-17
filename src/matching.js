@@ -1,0 +1,5 @@
+export const DOMAIN='students.claremontmckenna.edu';
+export function stamp(ride){return Date.parse(`${ride.date}T${ride.time.slice(0,5)}:00Z`);}
+export function matches(rides,own,userId,hours=5,now=Date.now()){return rides.filter(r=>r.user_id!==userId&&r.direction===own.direction&&r.airport===own.airport&&['looking','one_more'].includes(r.status)&&stamp(r)>=now&&Math.abs(stamp(r)-stamp(own))<=hours*3600000).sort((a,b)=>Math.abs(stamp(a)-stamp(own))-Math.abs(stamp(b)-stamp(own)));}
+export function difference(a,b){const n=Math.round((stamp(a)-stamp(b))/60000);if(!n)return 'Same flight time';const m=Math.abs(n);return `${m>=60?`${Math.floor(m/60)}h `:''}${m%60?`${m%60}m `:''}${n>0?'later':'earlier'} than you`;}
+export function pacificNow(){const p=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return Date.parse(`${g('year')}-${g('month')}-${g('day')}T${g('hour')}:${g('minute')}:00Z`);}
