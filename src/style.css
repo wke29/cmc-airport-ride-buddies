@@ -19,3 +19,15 @@
 .flight-time{border:0;padding:0;margin:0 0 24px;min-width:0}.flight-time legend{font-size:13px;font-weight:500;margin-bottom:12px}.time-controls{display:flex;align-items:flex-end;gap:12px;max-width:430px}.time-controls label{flex:1;min-width:0;margin:0;gap:6px}.time-controls select{width:100%}.time-colon{padding-bottom:13px;color:#777}.flight-time .field-hint{margin-top:9px}.time-controls .small{font-weight:400}
 
 .masked-time-controls{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.clock-mask{display:flex;align-items:center;border:1px solid #d7d9cb;border-radius:4px;background:#fffefa;padding:0 8px;gap:4px}.clock-mask input{border:0;background:none;width:54px;text-align:center;padding:12px 4px;font-size:18px;font-variant-numeric:tabular-nums}.clock-mask input:focus{outline:none}.clock-mask:focus-within{outline:2px solid #b0b89c;outline-offset:1px}.clock-mask span{font-size:18px;color:#73796a}.period-options{display:flex;gap:7px}.period-options label{position:relative;display:flex;align-items:center;justify-content:center;gap:0;margin:0;border:1px solid #d7d9cb;border-radius:4px;padding:12px 16px;cursor:pointer;font-size:13px;background:#fffefa}.period-options input{position:absolute;opacity:0;width:1px;height:1px;padding:0}.period-options .period-selected{background:#edf0e5;border-color:#899477;color:#3c4732}.period-options label:has(input:focus-visible){outline:2px solid #899477;outline-offset:3px}.contact-footer{font-size:15px;line-height:1.6;display:block;color:#676d5e;padding:25px 0;overflow-wrap:anywhere}.contact-footer a{font-weight:500;text-underline-offset:3px}.landing .google{margin-top:25px}
+
+/* Time inputs match the other form fields; AM/PM is one segmented control. */
+.clock-mask{padding:0 8px;gap:2px}
+.clock-mask input{font:inherit;font-size:15px;line-height:normal;width:48px;padding:12px 4px}
+.clock-mask span{font:inherit;font-size:15px}
+.period-options{display:flex;gap:0;border:1px solid #d7d9cb;border-radius:4px;overflow:hidden;background:#fffefa}
+.period-options label{border:0;border-radius:0;min-height:42px;padding:12px 16px;margin:0;font:inherit;font-size:13px;line-height:normal;background:transparent;color:#757a6b}
+.period-options label+label{border-left:1px solid #d7d9cb}
+.period-options .period-selected{background:#e4e9da;color:#35452a;font-weight:600;box-shadow:inset 0 0 0 1px #899477}
+.period-options label:hover{background:#f0f2e9}
+.period-options .period-selected:hover{background:#e4e9da}
+.period-options label:has(input:focus-visible){outline:2px solid #748361;outline-offset:-3px}
