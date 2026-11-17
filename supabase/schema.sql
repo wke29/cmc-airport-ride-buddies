@@ -26,7 +26,6 @@ language sql stable security definer set search_path='' as $$
    and i.provider='google'
    and lower(i.identity_data->>'email')=lower(u.email)
    and i.identity_data->>'email_verified'='true'
-   and coalesce(i.identity_data->>'hd','')<>''
  );
 $$;
 revoke all on function public.is_cmc() from public;
