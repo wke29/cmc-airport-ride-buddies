@@ -11,7 +11,7 @@ Without environment variables, the app offers a clearly labeled local demo. Samp
 4. Enter that client ID and secret in Supabase's Google provider settings. Never put the Google secret or Supabase service-role key in frontend environment variables.
 5. Under Supabase URL configuration set the production Site URL and exact allowed redirect URLs. Add a localhost URL only if developing locally.
 6. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in the build host. See `.env.example`. Rebuild after changes; Vite variables are embedded at build time.
-7. Test a real student account. SQL checks Google identity, email_verified, confirmed email, exact student email domain, and a nonempty Google Workspace hd claim. Confirm Supabase stores hd for your real CMC identity before launch; if absent, login stays denied. Do not weaken this to an editable user_metadata check. Domain hint is only account-selection convenience.
+7. Test a real student account. SQL checks Google identity, email_verified, confirmed email, and the exact student email domain. Supabase may omit Google's hd claim, so that field is not required. Checks use auth.identities, not editable user_metadata. Existing projects with the original hd check should run supabase/migrations/20261117_fix_cmc_validation.sql. Domain hint is only account-selection convenience.
 8. Test a non-CMC Google account, signed-out database requests, and attempts to edit another person's ride. They must not access data. Verify new students cannot read peer listings before setup and returning students can return without duplicating records.
 
 ## Development and deployment
