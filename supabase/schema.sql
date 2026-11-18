@@ -9,7 +9,7 @@ create table public.rides (
  id uuid primary key default gen_random_uuid(),
  user_id uuid not null references public.profiles(id) on delete cascade,
  direction text not null check (direction in ('outbound','inbound')),
- airport text not null check (airport in ('LAX','ONT')),
+ airport text not null check (airport in ('LAX','ONT','SNA','BUR')),
  date date not null,
  time time without time zone not null,
  comments text not null default '' check (length(comments)<=500),

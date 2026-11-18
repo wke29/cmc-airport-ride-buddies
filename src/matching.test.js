@@ -2,3 +2,12 @@ import {test} from 'node:test';import assert from 'node:assert/strict';import {m
 const own={user_id:'me',direction:'outbound',airport:'LAX',date:'2026-11-24',time:'23:30'};const r=(id,date,time,extra={})=>({...own,user_id:id,date,time,status:'looking',...extra});
 test('matches across midnight, sorts by proximity and excludes inaccessible candidates',()=>{const rows=[r('far','2026-11-25','03:00'),r('near','2026-11-25','00:00'),r('me','2026-11-24','23:30'),r('full','2026-11-24','23:30',{status:'full'}),r('other','2026-11-24','23:30',{airport:'ONT'}),r('reverse','2026-11-24','23:30',{direction:'inbound'})];assert.deepEqual(matches(rows,own,'me',5,0).map(x=>x.user_id),['near','far']);});
 test('past and outside-window rides are excluded',()=>{assert.equal(matches([r('past','2026-11-23','23:30'),r('late','2026-11-25','06:00')],own,'me',5,Date.parse('2026-11-24T00:00Z')).length,0);});
+
+test('all four airports match only the same airport in either direction',()=>{
+ for (const airport of ['LAX','ONT','SNA','BUR']) for (const direction of ['outbound','inbound']) {
+  const mine={...own,airport,direction};
+  const rows=['LAX','ONT','SNA','BUR'].map(a=>r(a,'2026-11-24','23:45',{airport:a,direction}));
+  rows.push(r('opposite','2026-11-24','23:35',{airport,direction:direction==='outbound'?'inbound':'outbound'}));
+  assert.deepEqual(matches(rows,mine,'me',5,0).map(x=>x.user_id),[airport]);
+ }
+});

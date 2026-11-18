@@ -32,3 +32,8 @@ Live authentication, SQL policies, email delivery avoidance, and CMC administrat
 
 ## Later events
 Update the event title/copy, default form dates and default-tab boundary in `src/main.jsx`. This version intentionally has one record per student per direction; use a fresh project or archive/reset event records before another break.
+
+## Add SNA and BUR to an existing database
+Supported airports: LAX, ONT, SNA (John Wayne Airport), and BUR (Hollywood Burbank Airport).
+
+For an existing Supabase project, run `supabase/migrations/20261118_add_sna_bur_airports.sql` in SQL Editor. It only expands the airport CHECK constraint; it does not update or delete ride rows, profiles, policies, or workflow. Do not rerun the full setup schema. New projects can use the updated `supabase/schema.sql`.
